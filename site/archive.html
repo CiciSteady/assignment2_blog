@@ -1,77 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Archive | Assignment 2</title>
+  <title>猫猫相册 | 猫猫没烦恼</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <div class="page-shell">
     <header class="site-header">
-      <a class="brand" href="index.html">Build Journal</a>
+      <a class="brand" href="index.html">猫猫没烦恼</a>
       <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="archive.html">Archive</a>
-        <a href="process.html">Process</a>
+        <a href="index.html">首页</a>
+        <a href="archive.html">猫猫相册</a>
+        <a href="process.html">主理人</a>
       </nav>
     </header>
 
     <main class="subpage-main">
       <section class="subpage-hero">
-        <p class="eyebrow">Archive</p>
-        <h1>Project files and previous coursework</h1>
+        <p class="eyebrow">Cat Gallery</p>
+        <h1>猫猫相册</h1>
         <p class="lead">
-          This section centralizes the downloadable materials required by the assignment, including the Assignment 1 report
-          and the Assignment 2 documentation.
+          收集那些值得保存的猫猫瞬间：懒懒地打盹、认认真真地盯着窗外、坐得端端正正像个小团长，还有突然贴近镜头的可爱脸。
         </p>
       </section>
 
-      <section class="download-grid" id="assignment1-links">
-        <article class="download-card">
-          <p class="card-tag">Assignment 1</p>
-          <h2>Markdown Report</h2>
-          <p>Download the Assignment 1 technical report in Markdown format.</p>
-          <a class="button button-primary" href="downloads/assignment1_report.md">Download .md</a>
+      <section class="photo-grid">
+        <article class="photo-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Cat%20tabby.jpg" alt="虎斑猫趴着看镜头">
+          <div class="photo-body">
+            <h2>午后打盹</h2>
+            <p>糯米会在安静的时候把自己缩成一小团，像一块温温热热的曲奇。</p>
+          </div>
         </article>
 
-        <article class="download-card">
-          <p class="card-tag">Assignment 1</p>
-          <h2>PDF Report</h2>
-          <p>Download the PDF version of the Assignment 1 submission.</p>
-          <a class="button button-primary" href="downloads/assignment1_report.pdf">Download .pdf</a>
+        <article class="photo-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Cute%20Orange%20Cat.jpg" alt="橘猫近距离看向镜头">
+          <div class="photo-body">
+            <h2>橘猫凝视</h2>
+            <p>奶油总会用一种很认真但又很天真的眼神，研究每一个会发出声音的袋子。</p>
+          </div>
         </article>
 
-        <article class="download-card">
-          <p class="card-tag">Assignment 2</p>
-          <h2>Process Report</h2>
-          <p>Read the Assignment 2 Markdown report describing setup, Git usage, and deployment.</p>
-          <a class="button button-primary" href="downloads/assignment2_report.md">Download .md</a>
+        <article class="photo-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Persian%20Black%20Cat.jpg" alt="黑色长毛猫坐着看向前方">
+          <div class="photo-body">
+            <h2>云朵出巡</h2>
+            <p>乌龙每天的巡视时间都很固定，步子轻轻的，但气场一点也不轻。</p>
+          </div>
+        </article>
+
+        <article class="photo-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Black%20Cat%20%2822553764744%29.jpg" alt="一只黑猫的照片">
+          <div class="photo-body">
+            <h2>夜色小煤球</h2>
+            <p>傍晚灯光亮起来的时候，黑猫的轮廓会变得特别柔和，像一团会呼吸的夜色。</p>
+          </div>
         </article>
       </section>
 
-      <section class="story-panel">
+      <section class="notes-panel">
         <div>
-          <p class="eyebrow">Assignment 1 Summary</p>
-          <h2>Matrix multiplication in Python</h2>
-          <p>
-            The first assignment focused on WSL-based Linux practice, Markdown writing, and matrix multiplication with Python.
-            This site keeps that work visible instead of treating it as a separate isolated submission.
-          </p>
-        </div>
-        <div class="summary-box">
-          <h3>Included materials</h3>
+          <p class="eyebrow">Photo Notes</p>
+          <h2>看猫猫的正确方式</h2>
           <ul class="compact-list">
-            <li>Assignment 1 Markdown report</li>
-            <li>Assignment 1 PDF export</li>
-            <li>Assignment 2 process report</li>
+            <li>不要突然大声喊它们的名字</li>
+            <li>让猫猫先决定要不要靠近你</li>
+            <li>愿意主动贴贴的时候，请珍惜那个瞬间</li>
           </ul>
         </div>
+        <div class="summary-box">
+          <h3>照片来源</h3>
+          <ul class="compact-list">
+            <li><a href="https://commons.wikimedia.org/wiki/File:Cat_tabby.jpg" target="_blank" rel="noreferrer">Cat tabby</a></li>
+            <li><a href="https://commons.wikimedia.org/wiki/File:Cute_Orange_Cat.jpg" target="_blank" rel="noreferrer">Cute Orange Cat</a></li>
+            <li><a href="https://commons.wikimedia.org/wiki/File:Persian_Black_Cat.jpg" target="_blank" rel="noreferrer">Persian Black Cat</a></li>
+            <li><a href="https://commons.wikimedia.org/wiki/File:Black_Cat_(22553764744).jpg" target="_blank" rel="noreferrer">Black Cat</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section-title" id="assignment1-links">
+        <p class="eyebrow">Downloads</p>
+        <h2>课程作业资料</h2>
+      </section>
+
+      <section class="resource-grid">
+        <article class="resource-card">
+          <p class="card-tag">Assignment 1</p>
+          <h2>Markdown 报告</h2>
+          <p>保留第一份作业的 Markdown 版本，方便继续回看矩阵乘法与 WSL 实践内容。</p>
+          <a class="button button-primary" href="downloads/assignment1_report.md">下载 .md</a>
+        </article>
+
+        <article class="resource-card">
+          <p class="card-tag">Assignment 1</p>
+          <h2>PDF 报告</h2>
+          <p>第一份作业的 PDF 导出版本，适合直接查看完整排版。</p>
+          <a class="button button-primary" href="downloads/assignment1_report.pdf">下载 .pdf</a>
+        </article>
+
+        <article class="resource-card">
+          <p class="card-tag">Assignment 2</p>
+          <h2>建站说明</h2>
+          <p>保留作业 2 的过程报告，记录网站搭建、Git 提交与部署方式。</p>
+          <a class="button button-primary" href="downloads/assignment2_report.md">下载 .md</a>
+        </article>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>Static files are intentionally lightweight for easy deployment.</p>
+      <p>猫猫照片在上，作业资料在下，可爱和认真都保留。</p>
     </footer>
   </div>
 </body>

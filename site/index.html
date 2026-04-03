@@ -1,117 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Assignment 2 | Static Personal Blog</title>
-  <meta name="description" content="A static personal blog website built for Assignment 2 with links to Assignment 1 materials.">
+  <title>猫猫没烦恼 | Cats Blog</title>
+  <meta name="description" content="猫猫没烦恼的猫猫博客，分享日常、照片、和软乎乎的快乐。">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <div class="page-shell">
     <header class="site-header">
-      <a class="brand" href="index.html">Build Journal</a>
+      <a class="brand" href="index.html">猫猫没烦恼</a>
       <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="archive.html">Archive</a>
-        <a href="process.html">Process</a>
+        <a href="index.html">首页</a>
+        <a href="archive.html">猫猫相册</a>
+        <a href="process.html">主理人</a>
       </nav>
     </header>
 
     <main>
       <section class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">Assignment 2 / Static Website</p>
-          <h1>A clean personal site with real project history.</h1>
+          <p class="eyebrow">Cats Blog / Daily Softness</p>
+          <h1>今天也被猫猫治愈了一点点。</h1>
           <p class="lead">
-            This static blog-style website documents my course work, highlights the Assignment 1 matrix multiplication report,
-            and shows the Git-based workflow used to build and deploy the site.
+            这里是“猫猫没烦恼”的小站，记录猫猫晒太阳、窝在沙发上发呆、突然冲刺、认真看窗外小鸟的每一个可爱瞬间。
+            如果生活有一点累，就来这里吸一口猫。
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="archive.html">View Deliverables</a>
-            <a class="button button-secondary" href="process.html">See Build Process</a>
+            <a class="button button-primary" href="archive.html">去看猫猫照片</a>
+            <a class="button button-secondary" href="process.html">认识主理人</a>
+          </div>
+          <div class="chip-row">
+            <span class="chip">软绵绵日常</span>
+            <span class="chip">窗边发呆冠军</span>
+            <span class="chip">踩奶研究所</span>
           </div>
         </div>
-        <aside class="hero-panel">
-          <h2>Deployment Snapshot</h2>
-          <ul class="compact-list">
-            <li>Static HTML/CSS with no external dependencies</li>
-            <li>Runs in WSL with Python's built-in HTTP server</li>
-            <li>Accessible by URL or local IP address</li>
-            <li>Prepared for GitHub Pages deployment</li>
-          </ul>
-        </aside>
+        <div class="hero-media">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Cute%20Orange%20Cat.jpg" alt="一只毛茸茸的橘猫正在看镜头">
+          <div class="floating-note">
+            <strong>今日值班猫</strong>
+            <span>奶油，负责撒娇和监督摸摸时长。</span>
+          </div>
+        </div>
       </section>
 
-      <section class="section-grid">
+      <section class="feature-strip">
         <article class="feature-card">
-          <p class="card-tag">Assignment 1</p>
-          <h2>Previous Work Integration</h2>
-          <p>
-            The site includes direct download links to the Assignment 1 Markdown report and PDF report so earlier work is
-            visibly connected to the new site.
-          </p>
-          <a class="text-link" href="archive.html#assignment1-links">Open Assignment 1 archive</a>
+          <p class="card-tag">今日推荐</p>
+          <h2>最会晒太阳的猫</h2>
+          <p>窗边暖光一到位，猫猫就会自动折叠成一团幸福小面包。</p>
         </article>
-
         <article class="feature-card">
-          <p class="card-tag">Git Workflow</p>
-          <h2>Meaningful Commit History</h2>
-          <p>
-            The repository is organized around logical milestones such as project setup, interface design, content integration,
-            documentation, and deployment preparation.
-          </p>
-          <a class="text-link" href="process.html#git-timeline">Review commit plan</a>
+          <p class="card-tag">本周观察</p>
+          <h2>凌晨跑酷指数</h2>
+          <p>夜里安静的时候，地板上总会响起一阵轻盈但很有存在感的小脚步。</p>
         </article>
-
         <article class="feature-card">
-          <p class="card-tag">Accessibility</p>
-          <h2>Simple to Serve Anywhere</h2>
-          <p>
-            The site can be served locally with one command and visited through <code>localhost</code> or a WSL IP address,
-            which satisfies the assignment's accessibility requirement.
-          </p>
-          <a class="text-link" href="process.html#deploy">Go to deployment steps</a>
+          <p class="card-tag">主理人说</p>
+          <h2>猫猫没烦恼</h2>
+          <p>不催猫、不打扰猫、尊重每一只猫自由切换高冷和黏人的权利。</p>
         </article>
       </section>
 
-      <section class="command-panel">
+      <section class="section-title">
+        <p class="eyebrow">Resident Cats</p>
+        <h2>常驻猫猫</h2>
+      </section>
+
+      <section class="cat-grid">
+        <article class="cat-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Cat%20tabby.jpg" alt="一只虎斑猫趴着休息">
+          <div class="cat-card-body">
+            <h3>糯米</h3>
+            <p>性格温柔，最喜欢把尾巴绕成一个小问号，然后慢悠悠靠近你。</p>
+          </div>
+        </article>
+
+        <article class="cat-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Cute%20Orange%20Cat.jpg" alt="一只橘猫的近景照片">
+          <div class="cat-card-body">
+            <h3>奶油</h3>
+            <p>食欲和好奇心都很旺盛，看见零食袋会第一时间冲过来围观。</p>
+          </div>
+        </article>
+
+        <article class="cat-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Persian%20Black%20Cat.jpg" alt="一只黑色长毛猫坐着看向前方">
+          <div class="cat-card-body">
+            <h3>乌龙</h3>
+            <p>优雅派代表，走路像一朵云，眼神却总像在认真分析你的举动。</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="notes-panel">
         <div>
-          <p class="eyebrow">Quick Command</p>
-          <h2>Start the website from WSL</h2>
-        </div>
-        <pre><code>cd /mnt/c/Users/r1382/Desktop/codex/assignment2_blog
-bash scripts/serve.sh 8000</code></pre>
-      </section>
-
-      <section class="notes-strip">
-        <div>
-          <h2>What this site demonstrates</h2>
+          <p class="eyebrow">给第一次来的朋友</p>
+          <h2>这里有什么</h2>
           <p>
-            Static page structure, responsive layout, navigation across multiple pages, integrated previous work, Markdown
-            documentation, and a traceable Git workflow.
+            你可以在猫猫相册页看到更多照片，在主理人页面认识“猫猫没烦恼”，也可以继续下载课程作业相关的 Markdown 和 PDF 材料。
+            我把作业资料保留在站点里，让这个小站既可爱又实用。
           </p>
         </div>
-        <div class="metric-box">
-          <span class="metric-number">3</span>
-          <span class="metric-label">HTML pages</span>
-        </div>
-        <div class="metric-box">
-          <span class="metric-number">5+</span>
-          <span class="metric-label">meaningful commits</span>
-        </div>
-        <div class="metric-box">
-          <span class="metric-number">2</span>
-          <span class="metric-label">downloadable reports</span>
+        <div class="quote-card">
+          <p>“猫猫不一定能解决所有问题，但它们会让你愿意慢一点，再呼吸一下。”</p>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>Assignment 2 Static Personal Blog Website</p>
-      <p>Update the student name and student ID before final submission.</p>
+      <p>猫猫没烦恼 · 一个认真记录猫猫可爱瞬间的小站</p>
+      <p>照片来源已在站内页面标注。</p>
     </footer>
   </div>
 </body>
 </html>
-

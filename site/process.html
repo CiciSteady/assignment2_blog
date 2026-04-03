@@ -1,104 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Process | Assignment 2</title>
+  <title>主理人 | 猫猫没烦恼</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <div class="page-shell">
     <header class="site-header">
-      <a class="brand" href="index.html">Build Journal</a>
+      <a class="brand" href="index.html">猫猫没烦恼</a>
       <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="archive.html">Archive</a>
-        <a href="process.html">Process</a>
+        <a href="index.html">首页</a>
+        <a href="archive.html">猫猫相册</a>
+        <a href="process.html">主理人</a>
       </nav>
     </header>
 
     <main class="subpage-main">
       <section class="subpage-hero">
-        <p class="eyebrow">Process</p>
-        <h1>How the website was built</h1>
+        <p class="eyebrow">About the Curator</p>
+        <h1>主理人：猫猫没烦恼</h1>
         <p class="lead">
-          The website was created as a no-dependency static project so it can run directly inside WSL and remain easy to
-          deploy with GitHub Pages or a local IP-based server.
+          我喜欢把猫猫的日常认真保存下来，因为它们总能用最松弛的状态提醒人类：生活不用总是很急，偶尔也可以像猫一样慢慢伸个懒腰。
         </p>
       </section>
 
-      <section class="timeline" id="git-timeline">
+      <section class="two-col">
+        <article class="profile-card">
+          <h2>这个网站在做什么</h2>
+          <p>
+            它是一座轻轻软软的小型猫猫博客，记录照片、观察、日常碎碎念，也保留课程作业中需要提交的资料下载入口。
+            所以它既是一个主题明确的个人站点，也继续满足原本的课程要求。
+          </p>
+          <div class="quote-card quote-inline">
+            <p>“猫猫没烦恼”想表达的是：和猫待在一起的时候，心会自然变得安静一点。</p>
+          </div>
+        </article>
+
+        <article class="profile-card">
+          <h2>主理人偏爱的猫猫瞬间</h2>
+          <ul class="compact-list">
+            <li>跳上窗台后立刻开始梳毛</li>
+            <li>装作不在意，其实一直在等你回头看它</li>
+            <li>一边踩奶一边把眼睛眯成一条线</li>
+            <li>夜里突然开始很认真地追空气</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section-title">
+        <p class="eyebrow">Daily Rhythm</p>
+        <h2>猫猫日常时间表</h2>
+      </section>
+
+      <section class="timeline">
         <article class="timeline-item">
-          <span class="timeline-step">01</span>
+          <span class="timeline-step">早</span>
           <div>
-            <h2>Initialize project structure</h2>
-            <p>Create a dedicated repository, add folders for pages, assets, downloads, docs, and scripts.</p>
-            <pre><code>mkdir -p assignment2_blog/site/assets assignment2_blog/site/downloads assignment2_blog/docs assignment2_blog/scripts</code></pre>
+            <h2>早上晒太阳</h2>
+            <p>挑选今天最舒服的光斑，把自己摆成最满意的姿势，顺便监督人类有没有及时起床。</p>
           </div>
         </article>
 
         <article class="timeline-item">
-          <span class="timeline-step">02</span>
+          <span class="timeline-step">午</span>
           <div>
-            <h2>Build the landing page</h2>
-            <p>Design a responsive homepage with navigation, summary cards, and a visible quick-start command block.</p>
-            <pre><code>git commit -m "feat: build responsive landing page and styles"</code></pre>
+            <h2>午后打盹</h2>
+            <p>进入长达数小时的深度放松模式，偶尔翻个身，尾巴轻轻地甩一下。</p>
           </div>
         </article>
 
         <article class="timeline-item">
-          <span class="timeline-step">03</span>
+          <span class="timeline-step">晚</span>
           <div>
-            <h2>Integrate Assignment 1 materials</h2>
-            <p>Copy the previous report into the static site and expose it through download buttons.</p>
-            <pre><code>cp ../assignment1_report.md site/downloads/
-cp ../assignment1_report.pdf site/downloads/</code></pre>
-          </div>
-        </article>
-
-        <article class="timeline-item">
-          <span class="timeline-step">04</span>
-          <div>
-            <h2>Document the full process</h2>
-            <p>Write a Markdown report and a copyable command guide that explain the technical decisions and workflow.</p>
-            <pre><code>git commit -m "docs: add assignment2 report and WSL command guide"</code></pre>
-          </div>
-        </article>
-
-        <article class="timeline-item">
-          <span class="timeline-step">05</span>
-          <div>
-            <h2>Prepare deployment</h2>
-            <p>Add a WSL serving script, an IP helper script, and a GitHub Pages workflow for an optional public URL.</p>
-            <pre><code>python3 -m http.server 8000 --directory site --bind 0.0.0.0</code></pre>
+            <h2>晚间巡视</h2>
+            <p>巡视客厅、桌角、书架和门口，确认一切都还在它们的掌控范围内。</p>
           </div>
         </article>
       </section>
 
-      <section class="deploy-panel" id="deploy">
+      <section class="deploy-panel">
         <div>
-          <p class="eyebrow">Deployment</p>
-          <h2>Local URL or IP address</h2>
-          <p>Start the local server from WSL and access the website through a browser:</p>
+          <p class="eyebrow">网站入口</p>
+          <h2>怎么打开这个猫猫网站</h2>
+          <pre><code>https://cicisteady.github.io/assignment2_blog/</code></pre>
+          <p>如果在本地预览，也可以直接运行下面的命令：</p>
           <pre><code>cd /mnt/c/Users/r1382/Desktop/codex/assignment2_blog
-bash scripts/get_wsl_ip.sh
 bash scripts/serve.sh 8000</code></pre>
-          <p>Then open either <code>http://localhost:8000</code> or <code>http://YOUR_WSL_IP:8000</code>.</p>
         </div>
         <div class="summary-box">
-          <h3>Optional public deployment</h3>
+          <h3>一句自我介绍</h3>
           <p>
-            The repository also includes a GitHub Pages workflow so the site can be published as a public URL after pushing
-            the repository to GitHub.
+            我是猫猫没烦恼，负责记录猫猫、夸猫猫、理解猫猫所有奇奇怪怪但完全合理的小习惯。
           </p>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>All pages are static and require no build step.</p>
+      <p>谢谢你来到这里，希望你也被猫猫短暂治愈。</p>
     </footer>
   </div>
 </body>
 </html>
-
