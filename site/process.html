@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Process | Assignment 2</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">Build Journal</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="archive.html">Archive</a>
+        <a href="process.html">Process</a>
+      </nav>
+    </header>
+
+    <main class="subpage-main">
+      <section class="subpage-hero">
+        <p class="eyebrow">Process</p>
+        <h1>How the website was built</h1>
+        <p class="lead">
+          The website was created as a no-dependency static project so it can run directly inside WSL and remain easy to
+          deploy with GitHub Pages or a local IP-based server.
+        </p>
+      </section>
+
+      <section class="timeline" id="git-timeline">
+        <article class="timeline-item">
+          <span class="timeline-step">01</span>
+          <div>
+            <h2>Initialize project structure</h2>
+            <p>Create a dedicated repository, add folders for pages, assets, downloads, docs, and scripts.</p>
+            <pre><code>mkdir -p assignment2_blog/site/assets assignment2_blog/site/downloads assignment2_blog/docs assignment2_blog/scripts</code></pre>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <span class="timeline-step">02</span>
+          <div>
+            <h2>Build the landing page</h2>
+            <p>Design a responsive homepage with navigation, summary cards, and a visible quick-start command block.</p>
+            <pre><code>git commit -m "feat: build responsive landing page and styles"</code></pre>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <span class="timeline-step">03</span>
+          <div>
+            <h2>Integrate Assignment 1 materials</h2>
+            <p>Copy the previous report into the static site and expose it through download buttons.</p>
+            <pre><code>cp ../assignment1_report.md site/downloads/
+cp ../assignment1_report.pdf site/downloads/</code></pre>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <span class="timeline-step">04</span>
+          <div>
+            <h2>Document the full process</h2>
+            <p>Write a Markdown report and a copyable command guide that explain the technical decisions and workflow.</p>
+            <pre><code>git commit -m "docs: add assignment2 report and WSL command guide"</code></pre>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <span class="timeline-step">05</span>
+          <div>
+            <h2>Prepare deployment</h2>
+            <p>Add a WSL serving script, an IP helper script, and a GitHub Pages workflow for an optional public URL.</p>
+            <pre><code>python3 -m http.server 8000 --directory site --bind 0.0.0.0</code></pre>
+          </div>
+        </article>
+      </section>
+
+      <section class="deploy-panel" id="deploy">
+        <div>
+          <p class="eyebrow">Deployment</p>
+          <h2>Local URL or IP address</h2>
+          <p>Start the local server from WSL and access the website through a browser:</p>
+          <pre><code>cd /mnt/c/Users/r1382/Desktop/codex/assignment2_blog
+bash scripts/get_wsl_ip.sh
+bash scripts/serve.sh 8000</code></pre>
+          <p>Then open either <code>http://localhost:8000</code> or <code>http://YOUR_WSL_IP:8000</code>.</p>
+        </div>
+        <div class="summary-box">
+          <h3>Optional public deployment</h3>
+          <p>
+            The repository also includes a GitHub Pages workflow so the site can be published as a public URL after pushing
+            the repository to GitHub.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>All pages are static and require no build step.</p>
+    </footer>
+  </div>
+</body>
+</html>
+
