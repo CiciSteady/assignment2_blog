@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assignment 2 | Static Personal Blog</title>
+  <meta name="description" content="A static personal blog website built for Assignment 2 with links to Assignment 1 materials.">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">Build Journal</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="archive.html">Archive</a>
+        <a href="process.html">Process</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Assignment 2 / Static Website</p>
+          <h1>A clean personal site with real project history.</h1>
+          <p class="lead">
+            This static blog-style website documents my course work, highlights the Assignment 1 matrix multiplication report,
+            and shows the Git-based workflow used to build and deploy the site.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="archive.html">View Deliverables</a>
+            <a class="button button-secondary" href="process.html">See Build Process</a>
+          </div>
+        </div>
+        <aside class="hero-panel">
+          <h2>Deployment Snapshot</h2>
+          <ul class="compact-list">
+            <li>Static HTML/CSS with no external dependencies</li>
+            <li>Runs in WSL with Python's built-in HTTP server</li>
+            <li>Accessible by URL or local IP address</li>
+            <li>Prepared for GitHub Pages deployment</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="section-grid">
+        <article class="feature-card">
+          <p class="card-tag">Assignment 1</p>
+          <h2>Previous Work Integration</h2>
+          <p>
+            The site includes direct download links to the Assignment 1 Markdown report and PDF report so earlier work is
+            visibly connected to the new site.
+          </p>
+          <a class="text-link" href="archive.html#assignment1-links">Open Assignment 1 archive</a>
+        </article>
+
+        <article class="feature-card">
+          <p class="card-tag">Git Workflow</p>
+          <h2>Meaningful Commit History</h2>
+          <p>
+            The repository is organized around logical milestones such as project setup, interface design, content integration,
+            documentation, and deployment preparation.
+          </p>
+          <a class="text-link" href="process.html#git-timeline">Review commit plan</a>
+        </article>
+
+        <article class="feature-card">
+          <p class="card-tag">Accessibility</p>
+          <h2>Simple to Serve Anywhere</h2>
+          <p>
+            The site can be served locally with one command and visited through <code>localhost</code> or a WSL IP address,
+            which satisfies the assignment's accessibility requirement.
+          </p>
+          <a class="text-link" href="process.html#deploy">Go to deployment steps</a>
+        </article>
+      </section>
+
+      <section class="command-panel">
+        <div>
+          <p class="eyebrow">Quick Command</p>
+          <h2>Start the website from WSL</h2>
+        </div>
+        <pre><code>cd /mnt/c/Users/r1382/Desktop/codex/assignment2_blog
+bash scripts/serve.sh 8000</code></pre>
+      </section>
+
+      <section class="notes-strip">
+        <div>
+          <h2>What this site demonstrates</h2>
+          <p>
+            Static page structure, responsive layout, navigation across multiple pages, integrated previous work, Markdown
+            documentation, and a traceable Git workflow.
+          </p>
+        </div>
+        <div class="metric-box">
+          <span class="metric-number">3</span>
+          <span class="metric-label">HTML pages</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-number">5+</span>
+          <span class="metric-label">meaningful commits</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-number">2</span>
+          <span class="metric-label">downloadable reports</span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Assignment 2 Static Personal Blog Website</p>
+      <p>Update the student name and student ID before final submission.</p>
+    </footer>
+  </div>
+</body>
+</html>
+
