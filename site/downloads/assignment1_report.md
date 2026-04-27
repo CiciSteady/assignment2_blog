@@ -1,7 +1,7 @@
 # Remote Development Project Report
 
-**Student Name**: [Your Name]  
-**Student ID**: [Your Student ID]
+**Student Name**: Ren Xuan 
+**Student ID**: ZY2557207
 
 ## System Configuration
 
@@ -191,13 +191,6 @@ python3 test_matrix_mul.py
 ```text
 All tests passed.
 ```
-
-## C Language Implementation and Performance Analysis (Bonus)
-
-This section is optional in the assignment description.  
-In the current WSL environment, GCC was not installed at the time of this submission, so a compiled-language implementation was not included.  
-If needed, this section can be extended later after installing the compiler toolchain in WSL.
-
 ## Conclusion
 
 This project helped me become more familiar with Unix/Linux command-line operations in a WSL environment and improved my ability to write technical reports in Markdown.  
