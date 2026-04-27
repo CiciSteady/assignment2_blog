@@ -1,7 +1,9 @@
 # Assignment 2 Static Personal Blog Website Report
 
 **Student Name**: Ren Xuan
+
 **Student ID**: ZY2557207
+
 ## Objective
 
 The goal of Assignment 2 is to build a static personal blog website, manage the project with Git, document the setup and deployment process in Markdown, integrate previous work, and make the website accessible through a URL or IP address.
