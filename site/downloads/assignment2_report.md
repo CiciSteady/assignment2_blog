@@ -1,8 +1,7 @@
 # Assignment 2 Static Personal Blog Website Report
 
-**Student Name**: [Your Name]  
-**Student ID**: [Your Student ID]
-
+**Student Name**: Ren Xuan
+**Student ID**: ZY2557207
 ## Objective
 
 The goal of Assignment 2 is to build a static personal blog website, manage the project with Git, document the setup and deployment process in Markdown, integrate previous work, and make the website accessible through a URL or IP address.
@@ -62,7 +61,7 @@ After starting the server, the website can be opened at:
 - `http://localhost:8000`
 - `http://<WSL_IP>:8000`
 
-This satisfies the assignment requirement that the website be accessible through a URL or IP address.
+This satisfies the requirement that the website be accessible through a URL or IP address.
 
 ### Optional GitHub Pages Deployment
 
