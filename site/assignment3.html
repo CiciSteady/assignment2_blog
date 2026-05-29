@@ -35,19 +35,64 @@
       <main class="subpage-main">
         <section class="subpage-hero">
           <p class="eyebrow">Assignment 3</p>
-          <h1>AI Agents</h1>
+          <h1>AI Agents and DeepSeek Q&A</h1>
           <p class="lead">
-            这里预留给 Assignment 3 的材料入口，后续可以继续放入 AI Agent 部署报告、脚本或 PDF 下载链接。
+            这里整合 Assignment 3 的 AI Agent 作业材料，包括 DeepSeek 在线问答平台入口、部署文档和 PDF 报告下载。
           </p>
         </section>
 
-        <section class="status-panel">
-          <p class="card-tag">Preparing</p>
-          <h2>内容整理中</h2>
-          <p>
-            当前页面已经接入侧边栏导航。等 Assignment 3 的提交文件复制到 <code>site/downloads</code> 后，可以在这里增加下载卡片。
-          </p>
-          <a class="button button-secondary" href="assignment2.html">查看 Assignment 2 示例</a>
+        <section class="download-grid" aria-label="Assignment 3 resources">
+          <article class="download-card">
+            <div>
+              <p class="card-tag">Online Agent</p>
+              <h2>DeepSeek AI 问答平台</h2>
+              <p>输入自己的 DeepSeek API Key 后，可以进行普通问答，也可以上传文本资料进行文件分析。</p>
+            </div>
+            <div class="file-meta">
+              <span>DeepSeek</span>
+              <span>Q&A UI</span>
+            </div>
+            <a class="button button-primary" href="deepseek_qa.html">打开平台</a>
+          </article>
+
+          <article class="download-card">
+            <div>
+              <p class="card-tag">PDF</p>
+              <h2>Assignment 3 PDF 报告</h2>
+              <p>记录在线 agent、Ollama 本地模型、IDE 集成、模型对比和反思过程。</p>
+            </div>
+            <div class="file-meta">
+              <span>.pdf</span>
+              <span>Final report</span>
+            </div>
+            <a class="button button-primary" href="downloads/assignment3_ai_agents_report.pdf">下载 .pdf</a>
+          </article>
+
+          <article class="download-card">
+            <div>
+              <p class="card-tag">Markdown</p>
+              <h2>Assignment 3 Markdown 报告</h2>
+              <p>保留可编辑的 Markdown 版本，方便继续补充实验截图、交互记录或部署说明。</p>
+            </div>
+            <div class="file-meta">
+              <span>.md</span>
+              <span>Editable source</span>
+            </div>
+            <a class="button button-secondary" href="downloads/assignment3_ai_agents_report.md">下载 .md</a>
+          </article>
+
+          <article class="download-card">
+            <div>
+              <p class="card-tag">Setup Note</p>
+              <h2>使用提醒</h2>
+              <p>静态网页不会保存 API Key 到代码中。提交 GitHub 前，请不要把真实密钥写入任何 HTML、JS 或 Markdown 文件。</p>
+            </div>
+            <div class="file-meta">
+              <span>Safe key</span>
+              <span>GitHub Pages</span>
+            </div>
+            <a class="button button-secondary" href="deepseek_qa.html">开始测试</a>
+          </article>
         </section>
       </main>
     </div>
