@@ -160,44 +160,43 @@ pre code {
 
 .assignment-nav {
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 .assignment-nav a {
-  display: grid;
-  gap: 4px;
-  padding: 13px 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 16px;
   border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.72);
-  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--accent-deep);
+  font-weight: 800;
+  text-align: center;
+  box-shadow: 0 12px 22px rgba(22, 43, 69, 0.06);
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
 }
 
 .assignment-nav a:hover {
-  transform: translateX(3px);
+  transform: translateY(-2px);
   border-color: rgba(47, 143, 138, 0.34);
   background: var(--accent-soft);
+  box-shadow: 0 16px 28px rgba(47, 143, 138, 0.14);
 }
 
 .assignment-nav a.active {
-  color: var(--accent-deep);
+  color: #f7fffe;
   border-color: rgba(47, 143, 138, 0.48);
-  background: linear-gradient(135deg, var(--accent-soft), #ffffff);
-  box-shadow: inset 4px 0 0 var(--accent);
-}
-
-.assignment-nav span {
-  font-weight: 800;
-}
-
-.assignment-nav small {
-  color: var(--muted);
-  font-size: 0.78rem;
+  background: var(--accent);
+  box-shadow: 0 16px 28px rgba(47, 143, 138, 0.22);
 }
 
 .hero,
 .subpage-hero,
 .notes-panel,
+.home-assignment-panel,
 .two-col,
 .deploy-panel,
 .feature-strip,
@@ -278,6 +277,50 @@ pre code {
   gap: 14px;
   flex-wrap: wrap;
   margin-top: 24px;
+}
+
+.home-assignment-panel {
+  margin-top: 24px;
+  padding: 28px;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.home-assignment-panel h2 {
+  margin: 0 0 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.08;
+}
+
+.home-assignment-panel p {
+  color: var(--muted);
+}
+
+.assignment-button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.assignment-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 0 18px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+  color: #f7fffe;
+  font-weight: 800;
+  box-shadow: 0 18px 30px rgba(47, 143, 138, 0.18);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.assignment-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 34px rgba(47, 143, 138, 0.24);
 }
 
 .resource-actions {
@@ -550,6 +593,7 @@ pre code {
 @media (max-width: 960px) {
   .site-layout,
   .hero,
+  .home-assignment-panel,
   .feature-strip,
   .cat-grid,
   .photo-grid,
@@ -589,6 +633,7 @@ pre code {
   .subpage-hero,
   .section-title,
   .notes-panel,
+  .home-assignment-panel,
   .two-col,
   .deploy-panel,
   .feature-card,
@@ -605,5 +650,9 @@ pre code {
 
   .hero-copy h1 {
     max-width: none;
+  }
+
+  .assignment-button-grid {
+    grid-template-columns: 1fr;
   }
 }
