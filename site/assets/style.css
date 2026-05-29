@@ -543,14 +543,16 @@ pre code {
 }
 
 .download-card h2,
-.status-panel h2 {
+.status-panel h2,
+.qa-settings h2 {
   margin: 0 0 10px;
   font-family: Georgia, "Times New Roman", serif;
   line-height: 1.08;
 }
 
 .download-card p,
-.status-panel p {
+.status-panel p,
+.qa-settings p {
   color: var(--muted);
 }
 
@@ -580,6 +582,137 @@ pre code {
     var(--panel-strong);
 }
 
+.qa-console {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 20px;
+}
+
+.qa-settings,
+.qa-chat {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel-strong);
+  box-shadow: var(--shadow);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  gap: 12px;
+}
+
+.field-group {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.field-group label,
+.qa-form label {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.field-group input,
+.field-group select,
+.field-group textarea,
+.qa-form textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px 13px;
+  color: var(--ink);
+  background: #fbfdff;
+  font: inherit;
+}
+
+.field-group textarea,
+.qa-form textarea {
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.field-group input:focus,
+.field-group select:focus,
+.field-group textarea:focus,
+.qa-form textarea:focus {
+  outline: 3px solid rgba(47, 143, 138, 0.18);
+  border-color: rgba(47, 143, 138, 0.45);
+}
+
+.field-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.checkbox-line {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.chat-log {
+  height: 520px;
+  overflow-y: auto;
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, #ffffff, #f8fbff);
+}
+
+.chat-message {
+  max-width: 88%;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 24px rgba(22, 43, 69, 0.07);
+}
+
+.chat-message strong {
+  display: block;
+  margin-bottom: 7px;
+}
+
+.chat-message p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.assistant-message {
+  justify-self: start;
+  background: #ffffff;
+}
+
+.user-message {
+  justify-self: end;
+  background: var(--accent-soft);
+}
+
+.qa-form {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.qa-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -599,6 +732,7 @@ pre code {
   .photo-grid,
   .resource-grid,
   .download-grid,
+  .qa-console,
   .two-col,
   .deploy-panel,
   .notes-panel {
@@ -607,6 +741,10 @@ pre code {
 
   .assignment-sidebar {
     position: static;
+  }
+
+  .chat-log {
+    height: 420px;
   }
 
   .timeline-item {
@@ -654,5 +792,13 @@ pre code {
 
   .assignment-button-grid {
     grid-template-columns: 1fr;
+  }
+
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-message {
+    max-width: 100%;
   }
 }
