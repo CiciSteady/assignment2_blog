@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Assignment 3: Deployment and Integration of AI Agents</title>
+  <style>
+    @page { margin: 18mm; }
+    body {
+      margin: 0;
+      color: #172033;
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.58;
+      background: #ffffff;
+    }
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.18;
+      color: #172033;
+    }
+    h1 { font-size: 30px; margin: 0 0 8px; }
+    h2 {
+      margin: 28px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #dff5f2;
+      font-size: 21px;
+    }
+    h3 { margin: 18px 0 8px; font-size: 17px; }
+    p { margin: 8px 0; }
+    ul, ol { margin: 8px 0 8px 22px; padding: 0; }
+    li { margin: 4px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid #d7dee9;
+      padding: 8px;
+      vertical-align: top;
+    }
+    th { background: #eef5ff; text-align: left; }
+    code, pre {
+      font-family: Consolas, "Courier New", monospace;
+      background: #f4f7fb;
+      border-radius: 6px;
+    }
+    code { padding: 1px 4px; }
+    pre {
+      padding: 10px 12px;
+      overflow-wrap: break-word;
+      white-space: pre-wrap;
+    }
+    .meta {
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #f4f7fb;
+      border: 1px solid #d7dee9;
+      margin: 14px 0 22px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      color: #17615e;
+      background: #dff5f2;
+      font-weight: 700;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <p class="tag">Assignment 3</p>
+  <h1>Deployment and Integration of AI Agents</h1>
+  <div class="meta">
+    <p><strong>Student Name:</strong> RenXuan</p>
+    <p><strong>Student ID:</strong> ZY2557207</p>
+    <p><strong>Website Integration:</strong> RenXuan's blog / Assignment 3 / DeepSeek AI Q&A platform</p>
+  </div>
+
+  <h2>Objective</h2>
+  <p>
+    This assignment practices deploying and using AI agents in a development workflow.
+    The submitted work includes an online DeepSeek Q&A platform, a local-model deployment workflow with Ollama,
+    IDE-assisted code refactoring, and reflective documentation comparing online and local model usage.
+  </p>
+
+  <h2>Rubric Checklist</h2>
+  <table>
+    <tr><th>Requirement</th><th>Implementation</th><th>Status</th></tr>
+    <tr>
+      <td>Online Agent</td>
+      <td>A static web Q&A platform calls the DeepSeek OpenAI-compatible chat-completions API. It also supports pasted or uploaded text context for file analysis.</td>
+      <td>Completed</td>
+    </tr>
+    <tr>
+      <td>Local Model Deployment</td>
+      <td>Ollama setup commands and a local interaction script are documented for models such as <code>qwen2.5:7b</code>.</td>
+      <td>Documented workflow</td>
+    </tr>
+    <tr>
+      <td>IDE Integration</td>
+      <td>An AI coding assistant was used to refactor a Python delay-analysis function and verify that the output stayed the same.</td>
+      <td>Completed</td>
+    </tr>
+    <tr>
+      <td>Documentation and Reflection</td>
+      <td>The report records setup steps, challenges, model comparison, and workflow reflection.</td>
+      <td>Completed</td>
+    </tr>
+  </table>
+
+  <h2>Online Agent: DeepSeek Q&A Platform</h2>
+  <p>
+    The online agent is implemented as <code>site/deepseek_qa.html</code> with JavaScript in
+    <code>site/assets/deepseek_qa.js</code>. The page asks the user to enter a DeepSeek API Key in the browser.
+    The key is not hard-coded in the source files, which avoids exposing secrets when uploading the project to GitHub.
+  </p>
+  <p>The JavaScript request uses the DeepSeek chat-completions endpoint:</p>
+  <pre><code>POST https://api.deepseek.com/chat/completions
+Authorization: Bearer &lt;DeepSeek API Key&gt;
+Content-Type: application/json</code></pre>
+  <p>
+    The page supports model selection for <code>deepseek-v4-flash</code>, <code>deepseek-v4-pro</code>,
+    and legacy compatibility options such as <code>deepseek-chat</code> and <code>deepseek-reasoner</code>.
+    It also includes a context text area and a text-file upload input, so the agent can answer questions based on pasted course notes, code, Markdown, or other text files.
+  </p>
+
+  <h2>Local Model Deployment with Ollama</h2>
+  <p>The local deployment workflow uses Ollama. The intended commands are:</p>
+  <pre><code>ollama pull qwen2.5:7b
+ollama serve
+python scripts\ollama_local_agent.py --model qwen2.5:7b --prompt "Explain what an AI coding agent does in three bullet points."</code></pre>
+  <p>
+    In the checked workspace, Ollama was not running, so the local script prints setup guidance instead of failing silently.
+    This makes the deployment process reproducible once Ollama is installed.
+  </p>
+
+  <h2>IDE Integration</h2>
+  <p>
+    The AI assistant was used to refactor a Python function from <code>avg_delay</code> to <code>average_delay</code>.
+    The refactor improved naming, type hints, missing-value handling, and direct script execution while preserving the same result.
+  </p>
+  <pre><code>python scripts\refactor_before.py
+python scripts\refactor_after.py
+python -c "import ast, pathlib; [ast.parse(path.read_text(encoding='utf-8')) for path in pathlib.Path('scripts').glob('*.py')]; print('syntax ok')"</code></pre>
+
+  <h2>Online vs. Local Model Comparison</h2>
+  <table>
+    <tr><th>Dimension</th><th>Online Model</th><th>Local Model</th></tr>
+    <tr><td>Setup</td><td>Requires API key and endpoint configuration.</td><td>Requires Ollama installation and model download.</td></tr>
+    <tr><td>Performance</td><td>Usually stronger for complex reasoning and writing.</td><td>Depends on local hardware and model size.</td></tr>
+    <tr><td>Privacy</td><td>Input is sent to a remote API provider.</td><td>Data can remain on the local computer.</td></tr>
+    <tr><td>Cost</td><td>May consume API quota or paid tokens.</td><td>No per-call API billing after download.</td></tr>
+    <tr><td>Best Use</td><td>Complex coding help, summarization, polished answers.</td><td>Private notes, offline experiments, quick drafts.</td></tr>
+  </table>
+
+  <h2>Challenges and Solutions</h2>
+  <ul>
+    <li><strong>API key security:</strong> the key is entered in the browser and not committed to GitHub.</li>
+    <li><strong>Static GitHub Pages limitation:</strong> the page is front-end only; if a browser blocks API requests, a local proxy or Python script can be used for demonstration.</li>
+    <li><strong>Ollama availability:</strong> the local script reports clear installation and model-pull steps when the service is unavailable.</li>
+    <li><strong>Workflow verification:</strong> Python scripts were syntax-checked and refactor examples were run before submission.</li>
+  </ul>
+
+  <h2>Reflection</h2>
+  <p>
+    Online models are the fastest way to build a useful agent because the model capability is provided by the API.
+    They are suitable for complex reasoning, file analysis, and code explanation. The main concern is privacy and API-key management.
+  </p>
+  <p>
+    Local models require more setup, but they give better control over privacy and offline use. A practical workflow is to use
+    online models for difficult reasoning and local models for private drafts or experiments. IDE integration is most useful when the prompt is specific and the result is verified with tests or command-line checks.
+  </p>
+
+  <h2>References</h2>
+  <ol>
+    <li>DeepSeek API Documentation: https://api-docs.deepseek.com/</li>
+    <li>Ollama Windows Documentation: https://docs.ollama.com/windows</li>
+    <li>Ollama Windows Download: https://ollama.com/download/windows</li>
+  </ol>
+</body>
+</html>
