@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeepSeek AI 问答平台 | RenXuan's blog</title>
+  <meta name="description" content="RenXuan's blog 的 DeepSeek AI 问答平台。">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/deepseek_qa.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">RenXuan's blog</a>
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="archive.html">猫猫相册</a>
+        <a href="process.html">主理人</a>
+      </nav>
+    </header>
+
+    <div class="site-layout">
+      <aside class="assignment-sidebar" aria-label="Assignment navigation">
+        <div class="sidebar-card">
+          <p class="eyebrow">Coursework</p>
+          <h2>Assignments</h2>
+          <nav class="assignment-nav">
+            <a href="assignment1.html">Assignment 1</a>
+            <a href="assignment2.html">Assignment 2</a>
+            <a class="active" href="assignment3.html">Assignment 3</a>
+            <a href="assignment4.html">Assignment 4</a>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="subpage-main">
+        <section class="subpage-hero">
+          <p class="eyebrow">DeepSeek Agent</p>
+          <h1>AI 问答平台</h1>
+          <p class="lead">
+            输入自己的 DeepSeek API Key 后，可以进行普通问答，也可以上传或粘贴文本资料，让模型基于资料回答问题。
+          </p>
+        </section>
+
+        <section class="qa-console" aria-label="DeepSeek AI question answering console">
+          <div class="qa-settings">
+            <div class="field-group">
+              <label for="api-key">DeepSeek API Key</label>
+              <input id="api-key" type="password" autocomplete="off" placeholder="sk-...">
+              <p class="field-note">密钥只在当前浏览器中使用，不会写入网页源码或提交到 GitHub。</p>
+            </div>
+
+            <div class="field-row">
+              <div class="field-group">
+                <label for="model">模型</label>
+                <select id="model">
+                  <option value="deepseek-v4-flash">deepseek-v4-flash</option>
+                  <option value="deepseek-v4-pro">deepseek-v4-pro</option>
+                  <option value="deepseek-chat">deepseek-chat (legacy)</option>
+                  <option value="deepseek-reasoner">deepseek-reasoner (legacy)</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label for="temperature">Temperature</label>
+                <input id="temperature" type="number" min="0" max="1.5" step="0.1" value="0.3">
+              </div>
+            </div>
+
+            <label class="checkbox-line">
+              <input id="remember-key" type="checkbox">
+              <span>仅在本机浏览器记住 API Key</span>
+            </label>
+
+            <div class="field-group">
+              <label for="system-prompt">系统提示词</label>
+              <textarea id="system-prompt" rows="4">You are RenXuan's AI coursework assistant. Answer clearly, cite the uploaded context when it is provided, and keep the response useful for software engineering study.</textarea>
+            </div>
+
+            <div class="field-group">
+              <label for="context-file">上传文本资料</label>
+              <input id="context-file" type="file" accept=".txt,.md,.csv,.json,.html,.css,.js,.py">
+              <p class="field-note">支持读取文本文件内容，用于完成 Analyze a File 类型的问题。</p>
+            </div>
+
+            <div class="field-group">
+              <label for="context-text">资料内容</label>
+              <textarea id="context-text" rows="8" placeholder="可以粘贴文章、代码、课程材料或上传文本文件后自动填入。"></textarea>
+            </div>
+          </div>
+
+          <div class="qa-chat">
+            <div id="chat-log" class="chat-log" aria-live="polite">
+              <article class="chat-message assistant-message">
+                <strong>DeepSeek Assistant</strong>
+                <p>你好，我可以回答问题，也可以根据你上传或粘贴的资料进行分析。</p>
+              </article>
+            </div>
+
+            <form id="qa-form" class="qa-form">
+              <label for="question">你的问题</label>
+              <textarea id="question" rows="5" required placeholder="例如：请总结这份文件的主要内容，并列出 online agent 和 local model 的区别。"></textarea>
+              <div class="qa-actions">
+                <button class="button button-primary" type="submit">发送问题</button>
+                <button class="button button-secondary" type="button" id="clear-chat">清空对话</button>
+              </div>
+              <p id="status-line" class="field-note" role="status"></p>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <p>RenXuan's blog · DeepSeek AI Q&A platform</p>
+    </footer>
+  </div>
+</body>
+</html>
