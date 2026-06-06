@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thesis Defense Game | RenXuan's blog</title>
+  <meta name="description" content="Assignment 4 Thesis Defense Game by RenXuan.">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/thesis_defense_game.js" defer></script>
+</head>
+<body class="game-body">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">RenXuan's blog</a>
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="archive.html">猫猫相册</a>
+        <a href="process.html">主理人</a>
+      </nav>
+    </header>
+
+    <div class="site-layout">
+      <aside class="assignment-sidebar" aria-label="Assignment navigation">
+        <div class="sidebar-card">
+          <p class="eyebrow">Coursework</p>
+          <h2>Assignments</h2>
+          <nav class="assignment-nav">
+            <a href="assignment1.html">Assignment 1</a>
+            <a href="assignment2.html">Assignment 2</a>
+            <a href="assignment3.html">Assignment 3</a>
+            <a class="active" href="assignment4.html">Assignment 4</a>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="subpage-main">
+        <section class="game-hero">
+          <p class="eyebrow">Assignment 4 / Option A</p>
+          <h1>Defend Your Thesis</h1>
+          <p class="lead">
+            A neon survival-defense game where a graduate student protects the thesis core from bugs, deadlines, and peer reviewers.
+          </p>
+        </section>
+
+        <section class="game-stage" aria-label="Thesis Defense Game">
+          <div class="game-panel">
+            <div class="game-topbar">
+              <div>
+                <span class="hud-label">Score</span>
+                <strong id="score-value">0</strong>
+              </div>
+              <div>
+                <span class="hud-label">Citations</span>
+                <strong id="citation-value">0/0</strong>
+              </div>
+              <div>
+                <span class="hud-label">Integrity</span>
+                <strong id="integrity-value">100%</strong>
+              </div>
+              <div>
+                <span class="hud-label">Defense</span>
+                <strong id="timer-value">10.0s</strong>
+              </div>
+            </div>
+
+            <div class="canvas-wrap">
+              <canvas id="game-canvas" width="896" height="640" aria-label="Thesis Defense Game canvas"></canvas>
+              <div id="result-overlay" class="result-overlay hidden">
+                <p class="eyebrow">Defense Complete</p>
+                <h2 id="result-title">Thesis Accepted</h2>
+                <p id="result-copy">Your committee is impressed.</p>
+                <button class="button button-primary" id="play-again" type="button">Play Again</button>
+              </div>
+            </div>
+
+            <div class="game-actions">
+              <button class="button button-primary" id="start-game" type="button">Start Defense</button>
+              <button class="button button-secondary" id="random-character" type="button">Random Character</button>
+              <button class="button button-secondary" id="reset-game" type="button">Reset</button>
+            </div>
+          </div>
+
+          <aside class="character-panel" aria-label="Character selection">
+            <p class="eyebrow">Character Selection</p>
+            <h2>Choose Your Defender</h2>
+            <div id="character-grid" class="character-grid"></div>
+            <div class="selected-character">
+              <span id="selected-chip">Data Knight</span>
+              <p id="selected-description">Balanced movement and a reliable defense pulse.</p>
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <p>RenXuan's blog · Thesis Defense Game</p>
+    </footer>
+  </div>
+</body>
+</html>
