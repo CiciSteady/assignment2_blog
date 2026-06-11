@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Assignment 4: Thesis Defense Game</title>
+  <style>
+    @page { margin: 18mm; }
+    body {
+      margin: 0;
+      color: #172033;
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.58;
+      background: #ffffff;
+    }
+    h1, h2, h3 {
+      color: #172033;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.18;
+    }
+    h1 { font-size: 31px; margin: 0 0 8px; }
+    h2 {
+      margin: 26px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #dff5f2;
+      font-size: 21px;
+    }
+    h3 { margin: 18px 0 8px; font-size: 17px; }
+    p { margin: 8px 0; }
+    ul { margin: 8px 0 8px 22px; padding: 0; }
+    li { margin: 4px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid #d7dee9;
+      padding: 8px;
+      vertical-align: top;
+    }
+    th { background: #eef5ff; text-align: left; }
+    code, pre {
+      font-family: Consolas, "Courier New", monospace;
+      background: #f4f7fb;
+      border-radius: 6px;
+    }
+    code { padding: 1px 4px; }
+    pre {
+      padding: 10px 12px;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+    }
+    .tag {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      color: #17615e;
+      background: #dff5f2;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .meta {
+      padding: 14px 16px;
+      border: 1px solid #d7dee9;
+      border-radius: 12px;
+      background: #f4f7fb;
+      margin: 14px 0 22px;
+    }
+  </style>
+</head>
+<body>
+  <p class="tag">Assignment 4 / Option A</p>
+  <h1>Thesis Defense Game</h1>
+  <div class="meta">
+    <p><strong>Student Name:</strong> RenXuan</p>
+    <p><strong>Student ID:</strong> ZY2557207</p>
+    <p><strong>Date:</strong> 2026-06-11</p>
+    <p><strong>Hosted App:</strong> https://cicisteady.github.io/assignment2_blog/thesis_defense_game.html</p>
+  </div>
+
+  <h2>1. Project Overview</h2>
+  <p>
+    For Assignment 4, I built a playable web game called <strong>Defend Your Thesis</strong>.
+    The concept is a one-minute survival-defense game where the player is a graduate student defending a thesis core and a committee gate from academic threats such as bugs, deadlines, and peer reviewers.
+  </p>
+
+  <h2>2. Functional Software</h2>
+  <p>The application runs in a browser and is integrated into the existing GitHub Pages blog.</p>
+  <ul>
+    <li>Character selection page with 7 playable characters</li>
+    <li>Canvas-based maze and real-time rendering</li>
+    <li>Thesis core and committee gate defense mechanic</li>
+    <li>Incoming humanoid Bugs, Deadlines, and Peer Reviewers</li>
+    <li>Citation collectibles and score logic</li>
+    <li>Keyboard controls with Arrow keys or WASD</li>
+    <li>Mouse/touch movement by clicking or tapping the canvas</li>
+    <li>One-minute timer, score, defended count, thesis integrity, rejection gate, and threat strength HUD</li>
+    <li>Clear success/failure overlay and replay flow</li>
+    <li>Defense objects with different rewards: Code Lab, Schedule Gate, and Committee Door</li>
+    <li>Threats shrink after successful defense and grow stronger after failed defense</li>
+    <li>Gate archers automatically shoot matching attackers from range</li>
+    <li>Player sword rescue mechanic for close-combat emergencies</li>
+    <li>Responsive layout for desktop and mobile screens</li>
+  </ul>
+
+  <h2>3. Game Design</h2>
+  <p>
+    The player moves through a maze, collects citations, and intercepts threats before they reach their target objects.
+    Bugs attack the Code Lab, Deadlines attack the Schedule Gate, and Peer Reviewers attack the Committee Door.
+    The round lasts 60 seconds. The player passes by surviving the full minute with thesis integrity above 0% and rejection gate below 100%.
+  </p>
+  <p>
+    If the player misses too many threats, those threat types become larger, faster, and more dangerous.
+    When the rejection gate reaches 100%, the player is rejected at the door.
+  </p>
+  <p>
+    Each gate has an archer helper. The Code Lab archer shoots Bugs, the Schedule Gate archer shoots Deadlines,
+    and the Committee Door archer shoots Peer Reviewers. If an attacker reaches an archer, the archer is pinned down
+    and cannot shoot until the player uses the sword to rescue them.
+  </p>
+
+  <h3>Characters</h3>
+  <table>
+    <tr><th>Character</th><th>Role</th></tr>
+    <tr><td>Data Knight</td><td>Balanced defender</td></tr>
+    <tr><td>Citation Mage</td><td>Wider citation collection aura</td></tr>
+    <tr><td>Method Engineer</td><td>Strong and stable defender</td></tr>
+    <tr><td>Coffee Sprinter</td><td>Fastest movement</td></tr>
+    <tr><td>Algorithm Ninja</td><td>Quick interception</td></tr>
+    <tr><td>Lab Guardian</td><td>Durable thesis protection</td></tr>
+    <tr><td>Reviewer Whisperer</td><td>Bonus score against peer reviewers</td></tr>
+  </table>
+
+  <h3>Defense Objects</h3>
+  <table>
+    <tr><th>Threat</th><th>Target Object</th><th>Successful Defense</th><th>Failed Defense</th></tr>
+    <tr><td>Bugs</td><td>Code Lab</td><td>Debug Point repairs integrity; Code Lab archer helps shoot Bugs</td><td>Bugs grow stronger and can pin the archer</td></tr>
+    <tr><td>Deadlines</td><td>Schedule Gate</td><td>Time Buffer slows pressure; Schedule archer helps shoot Deadlines</td><td>Deadlines grow stronger and can pin the archer</td></tr>
+    <tr><td>Peer Reviewers</td><td>Committee Door</td><td>Review Point lowers rejection risk; Committee archer helps shoot Reviewers</td><td>Reviewers grow stronger and can pin the archer</td></tr>
+  </table>
+
+  <h2>4. Architecture</h2>
+  <pre><code>HTML page
+  -> shared site CSS
+  -> game JavaScript
+  -> Canvas game rendering
+  -> HUD and game state updates</code></pre>
+  <p>The implementation uses <code>createState()</code>, <code>update(dt)</code>, <code>updateAllies()</code>, <code>updateArrows()</code>, <code>rescueAlly()</code>, <code>pathDirection()</code>, <code>draw()</code>, <code>endRound()</code>, and event listeners for controls.</p>
+
+  <h2>5. AI-Assisted Development</h2>
+  <p>
+    AI helped plan the game framework, convert the assignment requirements into concrete features,
+    and implement specific systems such as character selection, collision detection, pathfinding, score logic, archer helpers, arrow projectiles, sword rescue, threat growth, and responsive UI.
+  </p>
+  <p>
+    AI was most useful when the request was specific, such as asking for a tile-based collision system or a Canvas rendering loop.
+    The final code still required manual verification, link checking, and deployment integration.
+  </p>
+
+  <h2>6. Technical Details</h2>
+  <ul>
+    <li><strong>Rendering:</strong> HTML Canvas with a 28 by 21 tile maze.</li>
+    <li><strong>Canvas Size:</strong> 896 by 640 pixels with responsive CSS scaling.</li>
+    <li><strong>Collision:</strong> Future-position wall checks with X/Y axis movement.</li>
+    <li><strong>Pathfinding:</strong> Threats move toward their target objects using tile-based route selection.</li>
+    <li><strong>Helpers:</strong> Gate archers shoot matching attackers; pinned archers require player sword rescue.</li>
+    <li><strong>Loop:</strong> <code>requestAnimationFrame</code> with delta-time updates.</li>
+    <li><strong>Win/Fail:</strong> Survive 60 seconds to pass; fail if integrity reaches 0% or rejection reaches 100%.</li>
+    <li><strong>Controls:</strong> Arrow keys, WASD, and pointer movement.</li>
+  </ul>
+
+  <h2>7. Verification</h2>
+  <pre><code>node --check site\assets\thesis_defense_game.js</code></pre>
+  <p>The maze was checked as 21 rows by 28 columns, matching the 896 by 640 canvas when each tile is 32 pixels.</p>
+
+  <h2>8. Reflection</h2>
+  <p>
+    This assignment showed the difference between an interesting prompt and a working software product.
+    A stable game needs explicit state management, rendering, collision detection, pathfinding, controls, scoring, clear failure conditions, responsive layout, and deployment.
+  </p>
+  <p>
+    AI accelerated the implementation, but the developer still needed to define the goal, keep scope realistic, test the result, and prepare the final submission.
+  </p>
+
+  <h2>9. Conclusion</h2>
+  <p>
+    The final Assignment 4 submission is a functional hosted web game with character selection, one-minute gameplay, score logic,
+    threat growth/weakening mechanics, keyboard and mouse controls, and documentation explaining AI-assisted development.
+  </p>
+</body>
+</html>

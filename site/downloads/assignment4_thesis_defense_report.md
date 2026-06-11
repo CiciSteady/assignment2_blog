@@ -3,11 +3,11 @@
 **Student Name:** RenXuan  
 **Student ID:** ZY2557207  
 **Project Option:** Option A, "Defend Your Thesis"  
-**Date:** 2026-06-06
+**Date:** 2026-06-11
 
 ## 1. Project Overview
 
-For Assignment 4, I built a playable web game called **Defend Your Thesis**. The concept is a survival-defense game where the player is a graduate student defending a thesis core from incoming academic threats such as bugs, deadlines, and peer reviewers.
+For Assignment 4, I built a playable web game called **Defend Your Thesis**. The concept is a one-minute survival-defense game where the player is a graduate student defending a thesis core and a committee gate from incoming academic threats such as bugs, deadlines, and peer reviewers.
 
 The final application is a static web game that can be hosted on GitHub Pages:
 
@@ -36,16 +36,23 @@ The application runs in a browser and does not require a build step. It satisfie
 - Citation collectibles and score logic
 - Keyboard controls with Arrow keys or WASD
 - Mouse/touch movement by clicking or tapping the canvas
-- Game timer, score, citation count, and thesis integrity HUD
-- Game over / victory overlay
-- Guaranteed playable outcome after a 10-second defense round
+- One-minute defense timer, score, defended count, thesis integrity, rejection gate, and threat strength HUD
+- Clear pass/fail result overlay
+- Success condition: survive 60 seconds with thesis integrity above 0% and rejection gate below 100%
+- Failure condition: thesis integrity reaches 0%, or missed threats push the rejection gate to 100%
+- Three defense objects with different rewards: Code Lab, Schedule Gate, and Committee Door
+- Humanoid threat characters that shrink after successful defense and grow stronger after failed defense
+- Gate archers that automatically shoot matching attackers from range
+- Sword rescue mechanic: if attackers reach an archer, the archer is pinned down until the player defeats the attacker with a sword
 - Responsive layout for desktop and mobile screens
 
 ## 3. Game Design
 
 ### Core Mechanic
 
-The player moves through a maze and protects the thesis core. The player can collect citations for points while intercepting threats before they reach the thesis. The game keeps the defense round short and stable, so every player can complete a session and see a score.
+The player moves through a maze and protects three related defense objects. Bugs move toward the Code Lab, Deadlines move toward the Schedule Gate, and Peer Reviewers move toward the Committee Door. The player can collect citations for points, but the main task is to intercept incoming threats before they reach their target objects.
+
+The round lasts 60 seconds. If the player survives the full minute while keeping thesis integrity above 0% and rejection gate below 100%, the defense is passed. If the player misses too many threats, the threats become stronger, the rejection gate rises, and the player can be rejected at the door.
 
 ### Characters
 
@@ -61,13 +68,17 @@ The game includes seven characters:
 | Lab Guardian | Durable thesis protection |
 | Reviewer Whisperer | Bonus score against peer reviewers |
 
-### Threats
+### Defense Objects and Threats
 
-| Threat | Behavior |
-|---|---|
-| Bug | Moves toward the thesis and causes integrity damage |
-| Deadline | Faster and more dangerous pressure source |
-| Peer Review | Slower but persistent academic threat |
+| Threat | Target Object | Successful Defense Reward | Failed Defense Consequence |
+|---|---|---|---|
+| Bugs | Code Lab | +1 Debug Point, repairs a small amount of thesis integrity, and weakens Bugs | Bugs grow stronger and damage thesis integrity |
+| Deadlines | Schedule Gate | +1 Time Buffer, temporarily slows incoming pressure | Deadlines grow stronger and increase rejection pressure |
+| Peer Reviewers | Committee Door | +1 Review Point and lowers rejection risk | Peer Reviewers grow stronger and push the player closer to being rejected |
+
+The threats are drawn as small humanoid characters. Each gate also has an archer helper. The archer shoots only the matching threat type: the Code Lab archer shoots Bugs, the Schedule Gate archer shoots Deadlines, and the Committee Door archer shoots Peer Reviewers. When a threat reaches an archer, the archer becomes pinned down and cannot shoot. The player must move close with the sword to defeat the attacker and rescue the archer.
+
+When the player or an archer defends successfully, the corresponding threat type becomes weaker and smaller. When the player fails to defend, that threat type becomes larger, faster, and more dangerous.
 
 ## 4. Architecture
 
@@ -86,8 +97,12 @@ The JavaScript code is organized around:
 - `createState()`: initializes player, thesis core, citations, threats, score, and timer
 - `renderCharacterButtons()`: builds the character selection interface
 - `startGame()` and `resetGame()`: control game lifecycle
-- `update(dt)`: updates movement, collisions, threats, score, and timer
+- `update(dt)`: updates movement, pathfinding, collisions, threats, score, timer, integrity, and rejection gate
+- `updateAllies(dt)`: controls gate archer targeting and shooting
+- `updateArrows(dt)`: moves arrows and applies ranged defense damage
+- `rescueAlly()`: resolves close-combat rescue when the player reaches a pinned archer with the sword
 - `draw()`: renders the maze, citations, player, threats, particles, and overlays
+- `endRound(passed, reason)`: displays explicit success or failure feedback
 - Keyboard and pointer event listeners for controls
 
 ## 5. AI-Assisted Development Process
@@ -105,10 +120,14 @@ AI helped implement specific features:
 - Character selection and stat differences
 - Canvas maze rendering
 - Player movement with wall collision
-- Threat spawning and movement
+- Threat spawning, pathfinding, and target-specific movement
 - Citation collection
-- Score and timer logic
-- Victory overlay and replay flow
+- Score, one-minute timer, rejection gate, and pass/fail logic
+- Humanoid visual design for Bugs, Deadlines, and Peer Reviewers
+- Threat growth and weakening mechanics
+- Gate archer helpers and arrow projectile logic
+- Sword-based player rescue logic for close combat
+- Victory/failure overlay and replay flow
 - Responsive UI styling
 
 ### Problem Solving
@@ -133,7 +152,21 @@ Collision detection checks the player's future position against wall tiles. The 
 
 ### Game Loop
 
-The game uses `requestAnimationFrame` for smooth animation. Each frame calculates delta time, updates the player and threats, then redraws the game.
+The game uses `requestAnimationFrame` for smooth animation. Each frame calculates delta time, updates the player, moves threats toward their target objects, checks collisions, updates the rejection gate, and redraws the game.
+
+### Pass and Failure Logic
+
+The game has clear results:
+
+- **Pass:** the player survives 60 seconds, thesis integrity stays above 0%, and rejection gate stays below 100%.
+- **Fail by collapse:** thesis integrity reaches 0%.
+- **Fail by rejection:** missed threats push the rejection gate to 100%, so the player is rejected at the committee door.
+
+This makes the game more meaningful than a guaranteed-win demo. The player must actively defend the thesis environment.
+
+### Gate Archers and Sword Rescue
+
+To make the game more balanced and interesting, I added three gate archers. They help defend automatically, so the player does not need to chase every single enemy alone. However, they are fragile in close combat. If an attacker reaches an archer, the archer stops shooting and displays a distress state. The player character carries a sword and must move close to defeat that attacker, rescue the archer, and restore the gate defense.
 
 ### Controls
 
@@ -165,10 +198,11 @@ Local link checking confirmed that the Assignment 4 page links to:
 - The playable game
 - The Markdown report
 - The PDF report
+- The presentation PDF
 
 ## 8. Reflection
 
-This assignment showed the difference between "prompting for fun" and "engineering for results." A game idea can sound interesting, but making it stable requires careful decisions about game state, rendering, collision detection, controls, scoring, and deployment.
+This assignment showed the difference between "prompting for fun" and "engineering for results." A game idea can sound interesting, but making it stable requires careful decisions about game state, rendering, collision detection, pathfinding, controls, scoring, failure conditions, and deployment.
 
 AI was most helpful when the task was concrete. For example, asking for "a character selection system with 7 characters and unique stats" or "wall collision for a tile maze" produced useful implementation guidance. The final result still required verification, file organization, and deployment checks.
 
@@ -176,4 +210,4 @@ The most important lesson is that AI can speed up implementation, but the develo
 
 ## 9. Conclusion
 
-The final Assignment 4 submission is a functional, hosted web game. It includes a stable gameplay loop, character selection, score logic, keyboard and mouse controls, and documentation explaining how AI supported the development process.
+The final Assignment 4 submission is a functional, hosted web game. It includes a stable gameplay loop, character selection, score logic, one-minute win/fail rules, growing and weakening threats, keyboard and mouse controls, and documentation explaining how AI supported the development process.
