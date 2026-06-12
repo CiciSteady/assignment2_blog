@@ -76,7 +76,7 @@
     <p><strong>Student Name:</strong> RenXuan</p>
     <p><strong>Student ID:</strong> ZY2557207</p>
     <p><strong>Date:</strong> 2026-06-11</p>
-    <p><strong>Hosted App:</strong> https://cicisteady.github.io/assignment2_blog/thesis_defense_game.html</p>
+    <p><strong>Hosted Game:</strong> https://cicisteady.github.io/assignment2_blog/thesis_defense_game.html</p>
   </div>
 
   <h2>1. Project Overview</h2>
@@ -86,7 +86,7 @@
   </p>
 
   <h2>2. Functional Software</h2>
-  <p>The application runs in a browser and is integrated into the existing GitHub Pages blog.</p>
+  <p>The desktop browser game runs in a browser and is integrated into the existing GitHub Pages blog.</p>
   <ul>
     <li>Character selection page with 7 playable characters</li>
     <li>Canvas-based maze and real-time rendering</li>
@@ -94,14 +94,16 @@
     <li>Incoming humanoid Bugs, Deadlines, and Peer Reviewers</li>
     <li>Citation collectibles and score logic</li>
     <li>Keyboard controls with Arrow keys or WASD</li>
-    <li>Mouse/touch movement by clicking or tapping the canvas</li>
+    <li>Mouse movement by clicking the canvas</li>
     <li>One-minute timer, score, defended count, thesis integrity, rejection gate, and threat strength HUD</li>
+    <li>Difficulty selection with Low, Medium, and High modes</li>
+    <li>Target success-rate labels: Low 60%, Medium 20%, High 1%</li>
     <li>Clear success/failure overlay and replay flow</li>
     <li>Defense objects with different rewards: Code Lab, Schedule Gate, and Committee Door</li>
     <li>Threats shrink after successful defense and grow stronger after failed defense</li>
     <li>Gate archers automatically shoot matching attackers from range</li>
     <li>Player sword rescue mechanic for close-combat emergencies</li>
-    <li>Responsive layout for desktop and mobile screens</li>
+    <li>Desktop browser layout for keyboard and mouse play</li>
   </ul>
 
   <h2>3. Game Design</h2>
@@ -113,6 +115,11 @@
   <p>
     If the player misses too many threats, those threat types become larger, faster, and more dangerous.
     When the rejection gate reaches 100%, the player is rejected at the door.
+  </p>
+  <p>
+    The game includes three difficulty modes. Low targets about a 60% success rate with fewer and slower attackers.
+    Medium targets about a 20% success rate with more attackers and faster pressure.
+    High targets about a 1% success rate with large waves, fast attackers, and high rejection pressure.
   </p>
   <p>
     Each gate has an archer helper. The Code Lab archer shoots Bugs, the Schedule Gate archer shoots Deadlines,
@@ -165,6 +172,7 @@
     <li><strong>Collision:</strong> Future-position wall checks with X/Y axis movement.</li>
     <li><strong>Pathfinding:</strong> Threats move toward their target objects using tile-based route selection.</li>
     <li><strong>Helpers:</strong> Gate archers shoot matching attackers; pinned archers require player sword rescue.</li>
+    <li><strong>Difficulty:</strong> Low, Medium, and High adjust attacker speed, wave size, damage, rejection pressure, and archer support.</li>
     <li><strong>Loop:</strong> <code>requestAnimationFrame</code> with delta-time updates.</li>
     <li><strong>Win/Fail:</strong> Survive 60 seconds to pass; fail if integrity reaches 0% or rejection reaches 100%.</li>
     <li><strong>Controls:</strong> Arrow keys, WASD, and pointer movement.</li>
@@ -185,7 +193,7 @@
 
   <h2>9. Conclusion</h2>
   <p>
-    The final Assignment 4 submission is a functional hosted web game with character selection, one-minute gameplay, score logic,
+    The final Assignment 4 submission is a functional hosted desktop browser game with character selection, difficulty selection, one-minute gameplay, score logic,
     threat growth/weakening mechanics, keyboard and mouse controls, and documentation explaining AI-assisted development.
   </p>
 </body>

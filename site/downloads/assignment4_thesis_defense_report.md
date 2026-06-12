@@ -9,7 +9,7 @@
 
 For Assignment 4, I built a playable web game called **Defend Your Thesis**. The concept is a one-minute survival-defense game where the player is a graduate student defending a thesis core and a committee gate from incoming academic threats such as bugs, deadlines, and peer reviewers.
 
-The final application is a static web game that can be hosted on GitHub Pages:
+The final deliverable is a desktop browser game that can be hosted on GitHub Pages:
 
 ```text
 https://cicisteady.github.io/assignment2_blog/thesis_defense_game.html
@@ -25,7 +25,7 @@ site/assets/style.css
 
 ## 2. Functional Software
 
-The application runs in a browser and does not require a build step. It satisfies the requirement for a fully hosted web service because it is integrated into the existing GitHub Pages blog.
+The desktop browser game runs in a browser and does not require a build step. It satisfies the requirement for a fully hosted web service because it is integrated into the existing GitHub Pages blog.
 
 ### Implemented Features
 
@@ -35,8 +35,10 @@ The application runs in a browser and does not require a build step. It satisfie
 - Incoming threats: Bugs, Deadlines, and Peer Reviewers
 - Citation collectibles and score logic
 - Keyboard controls with Arrow keys or WASD
-- Mouse/touch movement by clicking or tapping the canvas
+- Mouse movement by clicking the canvas
 - One-minute defense timer, score, defended count, thesis integrity, rejection gate, and threat strength HUD
+- Difficulty selection with Low, Medium, and High modes
+- Target success-rate labels: Low 60%, Medium 20%, High 1%
 - Clear pass/fail result overlay
 - Success condition: survive 60 seconds with thesis integrity above 0% and rejection gate below 100%
 - Failure condition: thesis integrity reaches 0%, or missed threats push the rejection gate to 100%
@@ -44,7 +46,7 @@ The application runs in a browser and does not require a build step. It satisfie
 - Humanoid threat characters that shrink after successful defense and grow stronger after failed defense
 - Gate archers that automatically shoot matching attackers from range
 - Sword rescue mechanic: if attackers reach an archer, the archer is pinned down until the player defeats the attacker with a sword
-- Responsive layout for desktop and mobile screens
+- Desktop browser layout for keyboard and mouse play
 
 ## 3. Game Design
 
@@ -53,6 +55,14 @@ The application runs in a browser and does not require a build step. It satisfie
 The player moves through a maze and protects three related defense objects. Bugs move toward the Code Lab, Deadlines move toward the Schedule Gate, and Peer Reviewers move toward the Committee Door. The player can collect citations for points, but the main task is to intercept incoming threats before they reach their target objects.
 
 The round lasts 60 seconds. If the player survives the full minute while keeping thesis integrity above 0% and rejection gate below 100%, the defense is passed. If the player misses too many threats, the threats become stronger, the rejection gate rises, and the player can be rejected at the door.
+
+The game includes three difficulty modes:
+
+| Difficulty | Target Success Rate | Main Effect |
+|---|---:|---|
+| Low | 60% | Fewer attackers, slower movement, stronger archer support |
+| Medium | 20% | More attackers, faster pressure, weaker archer safety |
+| High | 1% | Large waves, fast attackers, high damage and rejection pressure |
 
 ### Characters
 
@@ -174,7 +184,7 @@ The game supports:
 
 - Arrow keys
 - WASD keys
-- Pointer click/tap on the canvas
+- Mouse click movement on the canvas
 
 ## 7. Verification
 
@@ -210,4 +220,4 @@ The most important lesson is that AI can speed up implementation, but the develo
 
 ## 9. Conclusion
 
-The final Assignment 4 submission is a functional, hosted web game. It includes a stable gameplay loop, character selection, score logic, one-minute win/fail rules, growing and weakening threats, keyboard and mouse controls, and documentation explaining how AI supported the development process.
+The final Assignment 4 submission is a functional, hosted desktop browser game. It includes a stable gameplay loop, character selection, difficulty selection, score logic, one-minute win/fail rules, growing and weakening threats, keyboard and mouse controls, and documentation explaining how AI supported the development process.
