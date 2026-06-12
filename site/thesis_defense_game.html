@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Thesis Defense Game | RenXuan's blog</title>
-  <meta name="description" content="Assignment 4 Thesis Defense Game by RenXuan.">
+  <meta name="description" content="Assignment 4 desktop browser Thesis Defense Game by RenXuan.">
   <link rel="stylesheet" href="assets/style.css">
   <script src="assets/thesis_defense_game.js" defer></script>
 </head>
@@ -38,7 +38,7 @@
           <p class="eyebrow">Assignment 4 / Option A</p>
           <h1>Defend Your Thesis</h1>
           <p class="lead">
-            A one-minute neon defense game: protect the thesis core, command a sword-wielding defender, and rescue gate archers before Bugs, Deadlines, and Peer Reviewers grow stronger.
+            A one-minute desktop browser defense game: protect the thesis core, command a sword-wielding defender, and rescue gate archers before Bugs, Deadlines, and Peer Reviewers grow stronger.
           </p>
         </section>
 
@@ -89,6 +89,11 @@
           </div>
 
           <aside class="character-panel" aria-label="Character selection">
+            <p class="eyebrow">Difficulty</p>
+            <h2>Choose Challenge</h2>
+            <div id="difficulty-grid" class="difficulty-grid" aria-label="Difficulty selection"></div>
+            <p id="difficulty-note" class="difficulty-note">Low: Fewer and slower attackers. Best for demo and first play.</p>
+
             <p class="eyebrow">Character Selection</p>
             <h2>Choose Your Defender</h2>
             <div id="character-grid" class="character-grid"></div>
@@ -98,6 +103,7 @@
             </div>
             <div class="defense-guide" aria-label="Defense rewards">
               <h3>Defense Objects</h3>
+              <p><strong>Difficulty:</strong> Low, Medium, and High mainly change attacker speed and wave size. Target success rates are 60%, 20%, and 1%.</p>
               <p><strong>Win:</strong> survive 60 seconds with Thesis Integrity above 0% and Rejection Gate below 100%.</p>
               <p><strong>Fail:</strong> if integrity reaches 0%, or if missed threats make the Rejection Gate reach 100%.</p>
               <p><strong>Gate Archers:</strong> each gate has an archer who shoots matching attackers from range. If an attacker reaches an archer, the archer is pinned down and needs your sword rescue.</p>
