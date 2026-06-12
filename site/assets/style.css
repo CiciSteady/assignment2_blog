@@ -760,7 +760,7 @@ pre code {
 
 .game-topbar {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 10px;
   padding: 18px;
   background: #111827;
@@ -911,6 +911,71 @@ pre code {
   line-height: 1.55;
 }
 
+.defense-guide {
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid rgba(55, 240, 212, 0.18);
+  border-radius: var(--radius-sm);
+  background: #111827;
+  color: #f8fffe;
+}
+
+.defense-guide h3 {
+  margin: 0 0 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+}
+
+.defense-guide p {
+  margin: 8px 0;
+  color: rgba(248, 255, 254, 0.74);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.defense-guide p strong {
+  color: #37f0d4;
+}
+
+.defense-guide ul {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.defense-guide li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 10px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.defense-guide span {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.defense-guide b {
+  display: inline-grid;
+  min-width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 999px;
+  color: #07111f;
+  background: #37f0d4;
+}
+
+.defense-guide small {
+  grid-column: 1 / -1;
+  color: rgba(248, 255, 254, 0.68);
+  line-height: 1.35;
+}
+
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -947,7 +1012,7 @@ pre code {
   }
 
   .game-topbar {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .timeline-item {
@@ -1012,6 +1077,6 @@ pre code {
   }
 
   .game-topbar {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
