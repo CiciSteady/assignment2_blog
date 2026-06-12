@@ -18,6 +18,8 @@ const resultEyebrow = document.querySelector("#result-eyebrow");
 const characterGrid = document.querySelector("#character-grid");
 const selectedChip = document.querySelector("#selected-chip");
 const selectedDescription = document.querySelector("#selected-description");
+const difficultyGrid = document.querySelector("#difficulty-grid");
+const difficultyNote = document.querySelector("#difficulty-note");
 const bugDefenseEl = document.querySelector("#bug-defense-value");
 const deadlineDefenseEl = document.querySelector("#deadline-defense-value");
 const reviewDefenseEl = document.querySelector("#review-defense-value");
@@ -31,6 +33,7 @@ const ARROW_SPEED = 440;
 const SWORD_RANGE = 44;
 const SWORD_COOLDOWN = 0.26;
 const MELEE_BREAK_SECONDS = 10;
+const PLAYER_COLLISION_RADIUS = 8;
 const maze = [
   "############################",
   "#............##............#",
@@ -63,6 +66,69 @@ const characters = [
   { name: "Algorithm Ninja", color: "#7c8cff", accent: "#38f2a5", speed: 180, radius: 11, ability: "Quick interception and stronger knockback after each successful defense." },
   { name: "Lab Guardian", color: "#62d2ff", accent: "#ffcb6b", speed: 144, radius: 14, ability: "Durable protection that reduces damage when any object is breached." },
   { name: "Reviewer Whisperer", color: "#b6f26c", accent: "#ff7ab6", speed: 164, radius: 12, ability: "Special bonus against Peer Reviewers and lowers the rejection gate faster." },
+];
+
+const difficultyLevels = [
+  {
+    id: "low",
+    name: "Low",
+    label: "低",
+    passRate: "60%",
+    speedMultiplier: 0.82,
+    spawnBase: 2.45,
+    spawnFloor: 1.05,
+    spawnRamp: 135,
+    powerSpawnFactor: 0.04,
+    maxThreats: 12,
+    startingPower: 1.6,
+    hpBonus: 0,
+    damageMultiplier: 0.82,
+    rejectionMultiplier: 0.78,
+    archerRangeMultiplier: 1.12,
+    archerCooldownMultiplier: 0.86,
+    arrowDamage: 1.3,
+    summary: "Fewer and slower attackers. Best for demo and first play.",
+  },
+  {
+    id: "medium",
+    name: "Medium",
+    label: "中",
+    passRate: "20%",
+    speedMultiplier: 1.05,
+    spawnBase: 1.75,
+    spawnFloor: 0.72,
+    spawnRamp: 95,
+    powerSpawnFactor: 0.075,
+    maxThreats: 17,
+    startingPower: 2.4,
+    hpBonus: 0.45,
+    damageMultiplier: 1.08,
+    rejectionMultiplier: 1.15,
+    archerRangeMultiplier: 0.94,
+    archerCooldownMultiplier: 1.08,
+    arrowDamage: 1,
+    summary: "More attackers and faster pressure. Requires active sword rescues.",
+  },
+  {
+    id: "high",
+    name: "High",
+    label: "高",
+    passRate: "1%",
+    speedMultiplier: 1.36,
+    spawnBase: 1.18,
+    spawnFloor: 0.42,
+    spawnRamp: 68,
+    powerSpawnFactor: 0.12,
+    maxThreats: 24,
+    startingPower: 3.4,
+    hpBonus: 1.15,
+    damageMultiplier: 1.38,
+    rejectionMultiplier: 1.6,
+    archerRangeMultiplier: 0.78,
+    archerCooldownMultiplier: 1.38,
+    arrowDamage: 0.72,
+    summary: "Large waves with fast attackers. Designed as a near-impossible challenge.",
+  },
 ];
 
 const defenseTargets = {
@@ -118,13 +184,19 @@ const directions = [
 ];
 
 let selectedIndex = 0;
+let selectedDifficultyIndex = 0;
 let keys = new Set();
 let state;
 let animationId;
 let lastFrame = 0;
 let mouseTarget = null;
 
+function currentDifficulty() {
+  return difficultyLevels[selectedDifficultyIndex];
+}
+
 function createState() {
+  const difficulty = currentDifficulty();
   const spawn = findMarker("P") || { x: 14.5 * TILE, y: 17.5 * TILE };
   const core = { x: 14 * TILE, y: 10.5 * TILE, radius: 26 };
   const citations = [];
@@ -168,9 +240,13 @@ function createState() {
     missed: 0,
     citationsTaken: 0,
     targetScores: { bug: 0, deadline: 0, review: 0 },
-    threatPower: { bug: 2, deadline: 2, review: 2 },
+    threatPower: {
+      bug: difficulty.startingPower,
+      deadline: difficulty.startingPower,
+      review: difficulty.startingPower,
+    },
     nextThreatUid: 1,
-    message: "Survive 60 seconds. Gate archers help from range, but rescue them with your sword if attackers get close.",
+    message: `${difficulty.name} mode, target pass rate ${difficulty.passRate}. Gate archers help from range, but rescue them with your sword if attackers get close.`,
   };
 }
 
@@ -230,6 +306,35 @@ function renderCharacterButtons() {
   });
 }
 
+function chooseDifficulty(index) {
+  selectedDifficultyIndex = index;
+  renderDifficultyButtons();
+  if (state) {
+    resetGame();
+  }
+}
+
+function renderDifficultyButtons() {
+  if (!difficultyGrid) return;
+  difficultyGrid.innerHTML = "";
+  difficultyLevels.forEach((difficulty, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `difficulty-card${index === selectedDifficultyIndex ? " selected" : ""}`;
+    button.innerHTML = `
+      <span>${difficulty.label} / ${difficulty.name}</span>
+      <strong>Target pass ${difficulty.passRate}</strong>
+      <small>Speed x${difficulty.speedMultiplier.toFixed(2)} · max ${difficulty.maxThreats} attackers</small>
+    `;
+    button.addEventListener("click", () => chooseDifficulty(index));
+    difficultyGrid.append(button);
+  });
+  if (difficultyNote) {
+    const difficulty = currentDifficulty();
+    difficultyNote.textContent = `${difficulty.name}: ${difficulty.summary}`;
+  }
+}
+
 function startGame() {
   state = createState();
   state.mode = "playing";
@@ -241,6 +346,7 @@ function startGame() {
 }
 
 function resetGame() {
+  cancelAnimationFrame(animationId);
   state = createState();
   resultOverlay.classList.add("hidden");
   mouseTarget = null;
@@ -252,6 +358,7 @@ function endRound(passed, reason) {
   if (state.mode === "ended") return;
   state.mode = "ended";
   cancelAnimationFrame(animationId);
+  const difficulty = currentDifficulty();
 
   const integrityBonus = Math.max(0, Math.round(state.integrity * 6));
   const defenseBonus = state.defended * 45;
@@ -260,13 +367,13 @@ function endRound(passed, reason) {
     state.score += integrityBonus + defenseBonus - rejectionPenalty;
     resultEyebrow.textContent = "Defense Passed";
     resultTitle.textContent = "Thesis Accepted";
-    resultCopy.textContent = `You survived 60 seconds, defended ${state.defended} threats, and kept rejection at ${Math.round(state.rejection)}%. Final score: ${Math.max(0, state.score)}.`;
+    resultCopy.textContent = `${difficulty.name} mode target pass rate ${difficulty.passRate}. You survived 60 seconds, defended ${state.defended} threats, and kept rejection at ${Math.round(state.rejection)}%. Final score: ${Math.max(0, state.score)}.`;
   } else {
     resultEyebrow.textContent = "Defense Failed";
     resultTitle.textContent = reason === "rejection" ? "Rejected at the Door" : "Thesis Collapsed";
     resultCopy.textContent = reason === "rejection"
-      ? `Missed threats became too strong and pushed the rejection gate to ${Math.round(state.rejection)}%. Defended threats: ${state.defended}.`
-      : `The thesis integrity dropped to ${Math.round(state.integrity)}%. Defended threats: ${state.defended}, missed threats: ${state.missed}.`;
+      ? `${difficulty.name} mode target pass rate ${difficulty.passRate}. Missed threats became too strong and pushed the rejection gate to ${Math.round(state.rejection)}%. Defended threats: ${state.defended}.`
+      : `${difficulty.name} mode target pass rate ${difficulty.passRate}. The thesis integrity dropped to ${Math.round(state.integrity)}%. Defended threats: ${state.defended}, missed threats: ${state.missed}.`;
   }
 
   resultOverlay.classList.remove("hidden");
@@ -275,7 +382,8 @@ function endRound(passed, reason) {
 }
 
 function spawnThreat() {
-  if (state.threats.length >= 14) return;
+  const difficulty = currentDifficulty();
+  if (state.threats.length >= difficulty.maxThreats) return;
 
   const spawns = [
     { x: 1.5 * TILE, y: 1.5 * TILE },
@@ -288,13 +396,16 @@ function spawnThreat() {
   const spawn = spawns[Math.floor(Math.random() * spawns.length)];
   const type = threatTypes[Math.floor(Math.random() * threatTypes.length)];
   const power = state.threatPower[type.id];
-  const hp = Math.max(1, Math.ceil(power));
+  const hp = Math.max(1, Math.ceil(power + difficulty.hpBonus));
 
   state.threats.push({
     ...type,
     uid: state.nextThreatUid,
     x: spawn.x,
     y: spawn.y,
+    speed: type.speed * difficulty.speedMultiplier,
+    damage: type.damage * difficulty.damageMultiplier,
+    rejection: type.rejection * difficulty.rejectionMultiplier,
     hp,
     maxHp: hp,
     hitClock: 0,
@@ -315,6 +426,7 @@ function loop(now) {
 
 function update(dt) {
   const character = characters[selectedIndex];
+  const difficulty = currentDifficulty();
   state.elapsed += dt;
   state.spawnClock += dt;
   state.slowClock = Math.max(0, state.slowClock - dt);
@@ -322,7 +434,10 @@ function update(dt) {
   state.slashClock = Math.max(0, state.slashClock - dt);
 
   const averagePower = averageThreatPower();
-  const spawnInterval = Math.max(0.9, 2.25 - state.elapsed / 130 - averagePower * 0.05);
+  const spawnInterval = Math.max(
+    difficulty.spawnFloor,
+    difficulty.spawnBase - state.elapsed / difficulty.spawnRamp - averagePower * difficulty.powerSpawnFactor
+  );
   if (state.spawnClock >= spawnInterval) {
     state.spawnClock = 0;
     spawnThreat();
@@ -368,7 +483,8 @@ function updatePlayer(dt, character) {
   const length = Math.hypot(dx, dy) || 1;
   const stepX = (dx / length) * character.speed * dt;
   const stepY = (dy / length) * character.speed * dt;
-  moveEntity(state.player, stepX, stepY, character.radius);
+  movePlayer(stepX, stepY);
+  unstickPlayer();
 }
 
 function moveEntity(entity, stepX, stepY, radius) {
@@ -376,6 +492,75 @@ function moveEntity(entity, stepX, stepY, radius) {
   if (canMoveTo(nextX, entity.y, radius)) entity.x = nextX;
   const nextY = entity.y + stepY;
   if (canMoveTo(entity.x, nextY, radius)) entity.y = nextY;
+}
+
+function movePlayer(stepX, stepY) {
+  const radius = PLAYER_COLLISION_RADIUS;
+  const steps = Math.max(1, Math.ceil(Math.max(Math.abs(stepX), Math.abs(stepY)) / 4));
+  const incX = stepX / steps;
+  const incY = stepY / steps;
+
+  for (let i = 0; i < steps; i += 1) {
+    const oldX = state.player.x;
+    const oldY = state.player.y;
+
+    if (canMoveTo(state.player.x + incX, state.player.y, radius)) {
+      state.player.x += incX;
+    } else {
+      tryCornerNudge("x", Math.sign(incX), radius);
+    }
+
+    if (canMoveTo(state.player.x, state.player.y + incY, radius)) {
+      state.player.y += incY;
+    } else {
+      tryCornerNudge("y", Math.sign(incY), radius);
+    }
+
+    if (state.player.x === oldX && state.player.y === oldY) {
+      break;
+    }
+  }
+}
+
+function tryCornerNudge(axis, direction, radius) {
+  if (!direction) return;
+  const offsets = [4, -4, 8, -8, 12, -12, 16, -16];
+
+  for (const offset of offsets) {
+    if (axis === "x") {
+      const nextX = state.player.x + direction * 3;
+      const nextY = state.player.y + offset;
+      if (canMoveTo(state.player.x, nextY, radius) && canMoveTo(nextX, nextY, radius)) {
+        state.player.y = nextY;
+        state.player.x = nextX;
+        return;
+      }
+    } else {
+      const nextX = state.player.x + offset;
+      const nextY = state.player.y + direction * 3;
+      if (canMoveTo(nextX, state.player.y, radius) && canMoveTo(nextX, nextY, radius)) {
+        state.player.x = nextX;
+        state.player.y = nextY;
+        return;
+      }
+    }
+  }
+}
+
+function unstickPlayer() {
+  if (canMoveTo(state.player.x, state.player.y, PLAYER_COLLISION_RADIUS)) return;
+
+  for (let radius = 2; radius <= TILE; radius += 2) {
+    for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 8) {
+      const x = state.player.x + Math.cos(angle) * radius;
+      const y = state.player.y + Math.sin(angle) * radius;
+      if (canMoveTo(x, y, PLAYER_COLLISION_RADIUS)) {
+        state.player.x = x;
+        state.player.y = y;
+        return;
+      }
+    }
+  }
 }
 
 function updateCitations(character) {
@@ -413,7 +598,7 @@ function updateThreats(dt, character) {
     const speedBoost = 1 + state.threatPower[threat.id] * 0.08;
     moveEntity(threat, route.x * threat.speed * speedBoost * slowFactor * dt, route.y * threat.speed * speedBoost * slowFactor * dt, threat.radius);
 
-    if (distance(threat, state.player) < threat.radius + character.radius + SWORD_RANGE && state.swordClock <= 0 && threat.hitClock <= 0) {
+    if (distance(threat, state.player) < threat.radius + PLAYER_COLLISION_RADIUS + SWORD_RANGE && state.swordClock <= 0 && threat.hitClock <= 0) {
       defendThreat(threat, character, "sword");
       if (threat.hp <= 0) return;
     }
@@ -432,6 +617,7 @@ function updateThreats(dt, character) {
 }
 
 function updateAllies(dt) {
+  const difficulty = currentDifficulty();
   state.allies.forEach((ally) => {
     const engaged = ally.engagedThreatUid ? findThreat(ally.engagedThreatUid) : null;
     if (ally.engagedThreatUid && !engaged) {
@@ -449,7 +635,7 @@ function updateAllies(dt) {
     if (!target) return;
 
     shootArrow(ally, target);
-    ally.cooldown = ARCHER_COOLDOWN + Math.random() * 0.35;
+    ally.cooldown = ARCHER_COOLDOWN * difficulty.archerCooldownMultiplier + Math.random() * 0.35;
   });
 }
 
@@ -475,8 +661,10 @@ function updateArrows(dt) {
 }
 
 function findArcherTarget(ally) {
+  const difficulty = currentDifficulty();
+  const range = ARCHER_RANGE * difficulty.archerRangeMultiplier;
   const candidates = state.threats
-    .filter((threat) => threat.id === ally.id && !threat.engagedAllyId && threat.hp > 0 && distance(ally, threat) <= ARCHER_RANGE)
+    .filter((threat) => threat.id === ally.id && !threat.engagedAllyId && threat.hp > 0 && distance(ally, threat) <= range)
     .sort((a, b) => distance(a, ally) - distance(b, ally));
   return candidates[0] || null;
 }
@@ -496,7 +684,8 @@ function shootArrow(ally, target) {
 }
 
 function archerHitThreat(threat, arrow) {
-  threat.hp -= 1.2;
+  const difficulty = currentDifficulty();
+  threat.hp -= difficulty.arrowDamage;
   threat.hitClock = 0.35;
   state.defended += 1;
   state.targetScores[threat.id] += 1;
@@ -531,7 +720,7 @@ function updateMeleeThreat(threat, character, dt) {
   threat.x += tug.x * 18 * dt;
   threat.y += tug.y * 18 * dt;
 
-  if (distance(threat, state.player) < threat.radius + character.radius + SWORD_RANGE && state.swordClock <= 0) {
+  if (distance(threat, state.player) < threat.radius + PLAYER_COLLISION_RADIUS + SWORD_RANGE && state.swordClock <= 0) {
     rescueAlly(threat, character, ally);
     return;
   }
@@ -999,6 +1188,7 @@ function drawBar(x, y, width, height, value, color, label) {
 }
 
 function drawReadyScreen(character) {
+  const difficulty = currentDifficulty();
   ctx.fillStyle = "rgba(7, 17, 31, 0.72)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "#e9fffb";
@@ -1007,7 +1197,7 @@ function drawReadyScreen(character) {
   ctx.fillText("Survive 60 seconds and keep the defense gate open", canvas.width / 2, canvas.height / 2 - 30);
   ctx.fillStyle = "rgba(233, 255, 251, 0.82)";
   ctx.font = "600 17px Segoe UI";
-  ctx.fillText("Defend Bugs, Deadlines, and Peer Reviewers before they reach their objects.", canvas.width / 2, canvas.height / 2 + 6);
+  ctx.fillText(`${difficulty.label} / ${difficulty.name} mode, target pass rate ${difficulty.passRate}. Defend threats before they reach their objects.`, canvas.width / 2, canvas.height / 2 + 6);
   ctx.fillStyle = character.color;
   ctx.font = "700 20px Segoe UI";
   ctx.fillText(`Selected defender: ${character.name}`, canvas.width / 2, canvas.height / 2 + 42);
@@ -1132,6 +1322,7 @@ resetButton.addEventListener("click", resetGame);
 playAgainButton.addEventListener("click", startGame);
 randomButton.addEventListener("click", () => chooseCharacter(Math.floor(Math.random() * characters.length)));
 
+renderDifficultyButtons();
 renderCharacterButtons();
 state = createState();
 updateHud();
