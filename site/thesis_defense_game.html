@@ -38,7 +38,7 @@
           <p class="eyebrow">Assignment 4 / Option A</p>
           <h1>Defend Your Thesis</h1>
           <p class="lead">
-            A neon survival-defense game where a graduate student protects the thesis core from bugs, deadlines, and peer reviewers.
+            A one-minute neon defense game: protect the thesis core, command a sword-wielding defender, and rescue gate archers before Bugs, Deadlines, and Peer Reviewers grow stronger.
           </p>
         </section>
 
@@ -50,23 +50,31 @@
                 <strong id="score-value">0</strong>
               </div>
               <div>
-                <span class="hud-label">Citations</span>
-                <strong id="citation-value">0/0</strong>
+                <span class="hud-label">Defended</span>
+                <strong id="defended-value">0</strong>
               </div>
               <div>
                 <span class="hud-label">Integrity</span>
                 <strong id="integrity-value">100%</strong>
               </div>
               <div>
-                <span class="hud-label">Defense</span>
-                <strong id="timer-value">10.0s</strong>
+                <span class="hud-label">Rejection Gate</span>
+                <strong id="rejection-value">0%</strong>
+              </div>
+              <div>
+                <span class="hud-label">Defense Timer</span>
+                <strong id="timer-value">60.0s</strong>
+              </div>
+              <div>
+                <span class="hud-label">Threat Strength</span>
+                <strong id="threat-power-value">2.0</strong>
               </div>
             </div>
 
             <div class="canvas-wrap">
               <canvas id="game-canvas" width="896" height="640" aria-label="Thesis Defense Game canvas"></canvas>
               <div id="result-overlay" class="result-overlay hidden">
-                <p class="eyebrow">Defense Complete</p>
+                <p class="eyebrow" id="result-eyebrow">Defense Complete</p>
                 <h2 id="result-title">Thesis Accepted</h2>
                 <p id="result-copy">Your committee is impressed.</p>
                 <button class="button button-primary" id="play-again" type="button">Play Again</button>
@@ -87,6 +95,17 @@
             <div class="selected-character">
               <span id="selected-chip">Data Knight</span>
               <p id="selected-description">Balanced movement and a reliable defense pulse.</p>
+            </div>
+            <div class="defense-guide" aria-label="Defense rewards">
+              <h3>Defense Objects</h3>
+              <p><strong>Win:</strong> survive 60 seconds with Thesis Integrity above 0% and Rejection Gate below 100%.</p>
+              <p><strong>Fail:</strong> if integrity reaches 0%, or if missed threats make the Rejection Gate reach 100%.</p>
+              <p><strong>Gate Archers:</strong> each gate has an archer who shoots matching attackers from range. If an attacker reaches an archer, the archer is pinned down and needs your sword rescue.</p>
+              <ul>
+                <li><span>Bugs -> Code Lab</span><b id="bug-defense-value">0</b><small>Debug Points repair integrity and shrink Bugs.</small></li>
+                <li><span>Deadlines -> Schedule Gate</span><b id="deadline-defense-value">0</b><small>Time Buffers slow incoming pressure.</small></li>
+                <li><span>Peer Reviewers -> Committee Door</span><b id="review-defense-value">0</b><small>Review Points lower rejection risk.</small></li>
+              </ul>
             </div>
           </aside>
         </section>
